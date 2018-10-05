@@ -38,4 +38,7 @@ either of the mentioned techniques. This is attained by:
   * All elements and nodes inside such frames do have `pan-y` in their`touch-action` CSS property (if not, enforce `pan-y`).
   * Scripted and programmtic scorlling is handled within the scrop of a frame, i.e., calls to `element.scrollIntoView()`
   do not propagate outside of a disabled frame.
- 
+  
+The approaches above ensure that CSS and scripts cannot block a scroll related gesture; however, it is imperative to ensure that scroll gestures are ultimately *consumed* by a parent document (which has `vertical-scroll` enabled). To this end, this policy should guarantee that any document with `vertical-scroll` feature disabled will *not consume* a scroll gesture (i.e., elements inside  such documents are not placed on the scroll chain). Some of the benefits of this enforcement are:
+* Embedded contents cannot block scrolling in their parent document by making themselves *infinitely* scrollable.
+* If an ebmedded document intends to block scrolling inside its own document (for legitimate reasons), applying `vertical-scroll` will still achieve that purpose while keeping the whole page responsive to user scroll.
