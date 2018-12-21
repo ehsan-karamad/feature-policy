@@ -42,4 +42,13 @@ either of the mentioned techniques. This is attained by:
 Furthermore, when `vertical-scroll` is disabled in a frame, no scrollable content should be able to consume scroll gestures
 from the user. This would ensure that an embedded content cannot use techniques such as infinite scrolling to steal all the
 scroll gestures on the page.
+
+**Note:** By definition, `vertical-scroll` blocks embedded content and therefore none of the restrictions above would apply
+to the main frame itself. For example, setting the following header:
+```
+Feature Policy: vertical-scroll 'none'
+```
+will not enforce any of the conditions above on the main frame's document; but it will impose those restrictions all *same and cross
+origin* embedded documents.
+will
  
